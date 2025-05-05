@@ -1,5 +1,10 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
 
 namespace TravelAgencyAPI.Controllers
 {
@@ -13,6 +18,11 @@ namespace TravelAgencyAPI.Controllers
         {
             _connectionString = configuration.GetConnectionString("TravelAgencyDb");
         }
+
+        /// <summary>
+        /// GET /api/trips
+        /// Pobiera wszystkie dostępne wycieczki wraz z ich podstawowymi informacjami i krajami docelowymi
+        /// </summary>
         [HttpGet]
         public IActionResult GetTrips()
         {
@@ -71,6 +81,11 @@ namespace TravelAgencyAPI.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        /// <summary>
+        /// GET /api/trips/clients/{id}
+        /// Pobiera wszystkie wycieczki powiązane z konkretnym klientem
+        /// </summary>
         [HttpGet("clients/{id}")]
         public IActionResult GetClientTrips(int id)
         {
@@ -152,6 +167,11 @@ namespace TravelAgencyAPI.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        /// <summary>
+        /// POST /api/trips/clients
+        /// Tworzy nowego klienta
+        /// </summary>
         [HttpPost("clients")]
         public IActionResult CreateClient([FromBody] ClientCreateDto clientDto)
         {
@@ -199,6 +219,11 @@ namespace TravelAgencyAPI.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        /// <summary>
+        /// PUT /api/trips/clients/{id}/trips/{tripId}
+        /// Rejestruje klienta na wycieczkę
+        /// </summary>
         [HttpPut("clients/{id}/trips/{tripId}")]
         public IActionResult RegisterClientForTrip(int id, int tripId)
         {
@@ -283,6 +308,11 @@ namespace TravelAgencyAPI.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        /// <summary>
+        /// DELETE /api/trips/clients/{id}/trips/{tripId}
+        /// Usuwa rejestrację klienta z wycieczki
+        /// </summary>
         [HttpDelete("clients/{id}/trips/{tripId}")]
         public IActionResult DeleteClientFromTrip(int id, int tripId)
         {
@@ -330,6 +360,8 @@ namespace TravelAgencyAPI.Controllers
             }
         }
     }
+
+    // Klasy DTO
     public class TripDto
     {
         public int IdTrip { get; set; }

@@ -1,19 +1,10 @@
 ﻿{
   "profiles": {
-    "http": {
+    "TravelAgencyAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5266",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "https": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:7044;http://localhost:5266",
+      "applicationUrl": "http://localhost:5266;https://localhost:7044",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
